@@ -2,7 +2,7 @@
 
 (Extended/Inspired from Seb Rose's Diamond kata at http://cyber-dojo.org/ )
 
-## 1. Sparkly Diamonds (New to the code dojo / programming?)
+## 1. Sparkly Diamonds
 
 Given a number, print a diamond made up of asterisks (\*)
 
@@ -29,7 +29,7 @@ For example:
      *
 ```
 
-## 2. Alphabet Diamonds (Regulars start here)
+## 2. Alphabet Diamonds 
 
 *printDiamond('E')*
 ```
@@ -81,4 +81,3 @@ F E D C B A B C D E F
        F H
         G
 ```
-
