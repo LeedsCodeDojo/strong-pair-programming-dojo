@@ -1,30 +1,29 @@
+package diamond
+
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import java.lang.System.lineSeparator
 
-@DisplayName("Diamond Kata Tests")
-class DiamondTest {
+class `Diamond Kata Test` {
 
-    @Test
-    fun canPrintA() = assertDiamond('A') {
+    @Test fun `print diamond to A`() = assertDiamond('A') {
         """
           A
           """
     }
 
-    @Test
-    fun canPrintC() = assertDiamond('C') {
+    @Test fun `print diamond to C`() = assertDiamond('C') {
         """
             A
            B B
           C   C
            B B
-            A"""
+            A
+            """
     }
 
-    @Test
-    fun canPrintE() = assertDiamond('E') {
+    @Test fun `print diamond to E`() = assertDiamond('E') {
         """
                A
               B B
@@ -52,12 +51,13 @@ val aToZ: Sequence<Char> =
 val aToZIndexed = aToZ.withIndex()
 
 fun diamondStr(endChar: Char): String {
+    val endIndex = aToZIndexed.first { it.value == endChar }.index
     val topDiamond = aToZIndexed
         .takeWhile { (_, char) -> char <= endChar }
-        .map { padChars(it.index, it.value, aToZIndexed.first { it.value == endChar }.index) }
+        .map { padChars(it.index, it.value, endIndex) }
         .toList()
 
-    return (topDiamond + topDiamond.tail().asReversed()).joinToString(lineSeparator())
+    return (topDiamond + topDiamond.asReversed().tail()).joinToString(lineSeparator())
 }
 
 fun padChars(index: Int, char: Char, endCharIndex: Int): String {
@@ -78,7 +78,7 @@ fun getStartPad(currentCharIndex: Int, endCharIndex: Int): String =
     else
         (endCharIndex - currentCharIndex).spaces()
 
-fun <T> List<T>.tail(): List<T> = subList(0, lastIndex)
+fun <T> List<T>.tail(): List<T> = if (this.size > 2) subList(1, lastIndex + 1) else emptyList()
 
 fun Int.spaces(): String = if (this == 0) "" else String.format("%" + this + "s", "")
 
